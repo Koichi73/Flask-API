@@ -5,7 +5,7 @@ def input_check(json_data):
     # nameキーの条件
     if "name" in json_data:
         name = json_data["name"]
-        if not (len(name) <= 8 and name.isalpha()):
+        if not (len(name) <= 8 and name.isalpha() and name.isascii()):
             result = False
     else:
         result = False

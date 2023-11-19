@@ -49,6 +49,9 @@ def stocks():
 
 @stocks_bp.route("/<name>", methods=["GET", "POST"], strict_slashes=False)
 def stocks_name(name):
+    if not (len(name) <= 8 and name.isalpha() and name.isascii()):
+        return jsonify({"message": "FORMAT ERROR IN NAME"}) # nameの形式エラーを表示
+    
     total_amount = db.session.query(func.sum(Stocks.amount)) \
                                 .filter(Stocks.name == name) \
                                 .scalar()
